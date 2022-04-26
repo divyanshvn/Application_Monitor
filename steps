@@ -54,8 +54,8 @@ influx telegrafs update \
 
 influx telegrafs update \
   -i 0944bb6fd7b9c000	\
-  -n "manual_config_updated_nsfs" \
-  -d "disk ignore tracefs nsfs added" \
+  -n "manual_config_updated_nsfs_directory_updated" \
+  -d "disk ignore tracefs nsfs added, directory added" \
   -f sys_conf.conf
 
 

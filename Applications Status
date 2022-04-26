@@ -1,7 +1,7 @@
 1. Apache.
 2. Cassandra.
 3. CPU								: Being Monitored # Read metrics about cpu usage
-4. Directory.
+4. Directory.						: Being Monitored ::: Need to carefully add the directory and finished directory path.
 5. Disk.							: Being Monitored # The disk input plugin gathers metrics about disk usage.
 6. DiskIO.							: Being Monitored # Read metrics about disk IO by device
 7. DNS Query.			
