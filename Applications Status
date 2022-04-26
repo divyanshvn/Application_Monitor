@@ -8,8 +8,8 @@
 8. Docker.							: Being Monitored # Read metrics about docker containers
 9. File.							: Being Monitored ::: Set the file type propery that is accepted.
 10. Filecount.                      : Being Monitored ::: Set the directory path properly.
-11. filestat.
-12. Http.
+11. filestat.						: Being Monitored ::: Same as the above ones
+12. Http.							
 13. Http Listener/Response.
 14. InfluxDb, InfluxDb Listener.
 15. Internet Speed.
