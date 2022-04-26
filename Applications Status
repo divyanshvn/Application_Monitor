@@ -1,0 +1,28 @@
+1. Apache.
+2. Cassandra.
+3. CPU								: Being Monitored # Read metrics about cpu usage
+4. Directory.
+5. Disk.							: Being Monitored # The disk input plugin gathers metrics about disk usage.
+6. DiskIO.							: Being Monitored # Read metrics about disk IO by device
+7. DNS Query.			
+8. Docker.							: Being Monitored # Read metrics about docker containers
+9. File.							
+10. Filecount.
+11. filestat.
+12. Http.
+13. Http Listener/Response.
+14. InfluxDb, InfluxDb Listener.
+15. Internet Speed.
+16. Memory.							: Being Monitored # Read metrics about memory usage
+17. MySQL.
+18. System.							: Being Monitored # Read metrics about system load & uptime
+19. Temperature.
+20. Webhook.
+21. Wireless.
+
+------------
+22. Net 							: Being Monitored # Gather metrics about network interfaces
+23. Processes						: Being Monitored # Get the number of processes and group them by status
+24. Swap							: Being Monitored # Read metrics about swap memory usage
+
+
