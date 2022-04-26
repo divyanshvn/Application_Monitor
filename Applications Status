@@ -4,9 +4,9 @@
 4. Directory.						: Being Monitored ::: Need to carefully add the directory and finished directory path.
 5. Disk.							: Being Monitored # The disk input plugin gathers metrics about disk usage.
 6. DiskIO.							: Being Monitored # Read metrics about disk IO by device
-7. DNS Query.						: Being Monitored ::: Need to add the server, network, domain port etc 
+7. DNS Query.						: Being Monitored ::: Need to add the server, network, domain port etc.
 8. Docker.							: Being Monitored # Read metrics about docker containers
-9. File.							
+9. File.							: Being Monitored ::: Set the file type propery that is accepted.
 10. Filecount.
 11. filestat.
 12. Http.
