@@ -3,12 +3,6 @@
 
 
 
-
-
-
-
-
-
 --------- Setting up Docker for influx and telegraf ------------------
 
 docker run -d --name=influxdb \

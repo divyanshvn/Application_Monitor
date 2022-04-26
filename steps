@@ -63,7 +63,6 @@ docker run --net=container:influxdb telegraf
 docker run --rm telegraf telegraf config > telegraf.conf
 docker run -v $PWD/sys_conf.conf:/etc/telegraf/telegraf.conf:ro telegraf
 
-
 Troubleshooting
 On Linux, the list of disks is taken from the /proc/self/mounts file and a statfs call is made on the second column. If any expected filesystems are missing ensure that the telegraf user can read these files:
 
@@ -73,3 +72,9 @@ $ sudo -u telegraf stat /home
 It may be desired to use POSIX ACLs to provide additional access:
 
 sudo setfacl -R -m u:telegraf:X /var/lib/docker/volumes/
+
+------------------------------------------------------------------
+
+Loaded inputs: cpu disk diskio docker mem net processes swap system
+
+------------------------------------------------------------------
