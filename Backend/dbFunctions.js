@@ -3,6 +3,7 @@
 const { InfluxDB, Point } = require('@influxdata/influxdb-client');
 const { response, query } = require('express');
 const res = require('express/lib/response');
+const { Connection } = require('pg');
 
 // const INFLUX_ORG = "MyDB"
 // const INFLUX_BUCKET = "MyBucket1"
@@ -35,6 +36,8 @@ const graph_data = (req, res) => {
   // ret_obj = {}
   let x = []
   let time_x = []
+  let ret_x = []
+
   queryApi.queryRows(fluxQuery, {
     next(row, tableMeta) {
       const o = tableMeta.toObject(row)
@@ -42,6 +45,10 @@ const graph_data = (req, res) => {
 
       x.push(o._value);
       time_x.push(o._time);
+      ret_x.push({
+        "time": o._time,
+        "value": o._value
+      });
       // console.log(
       //   `${o._time} ${o._measurement} : ${o._field}=${o._value}`
       // )
@@ -53,7 +60,7 @@ const graph_data = (req, res) => {
     },
     complete() {
       console.log(fluxQuery);
-      res.send({ "time": time_x, "vals": x });
+      res.send({ "time": time_x, "value": x });
       console.log('\nFinished SUCCESS')
     },
   });
@@ -63,10 +70,16 @@ const graph_data = (req, res) => {
 const add_check = (req, res) => {
   var check_meas = req.body.measurement;
   var check_val = parseInt(req.body.value);
+  var user_id = req.body.user;
 
-  checks[check_meas] = check_val;
+  const query = `
+    insert into checks(user_id,metric,value) values ($1,$2,$3)
+  `
+  Connection.query()
+
   var x = { status: "New Threshold check Added" };
   res.send(x);
+
 }
 
 
