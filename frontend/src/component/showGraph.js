@@ -24,18 +24,24 @@ function ShowGraph(){
     const endChangeHandler = (event) => {
          setEndTime(event.target.value);
     }
-    
-    const HandleSubmit = (event) => {
-        event.preventDefault();
-        useEffect(() => {
-          fetch(`http://localhost:3001/${processname}/${metricname}/${starttime}/${endtime}`)
+
+    async function fetchData() {
+      fetch(`http://localhost:3001/${processname}/${metricname}/${starttime}/${endtime}`)
           .then(res => res.json())
           .then(data => {
               //printBoxes(data, setX);
               setData(data);
               console.log(data);
          })
-        }, []);
+    }
+
+    useEffect(() => {
+      fetchData()
+    }, [])
+
+    const HandleSubmit = (event) => {
+        event.preventDefault();
+        fetchData();
     }
     //const submitHandler = (event) => {  // add submit here
        // event.preventDefault();
