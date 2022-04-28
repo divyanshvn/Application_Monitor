@@ -25,7 +25,7 @@ function ShowGraph(){
          setEndTime(event.target.value);
     }
     
-    const handleSubmit = (event) => {
+    const HandleSubmit = (event) => {
         event.preventDefault();
         useEffect(() => {
           fetch(`http://localhost:3001/${processname}/${metricname}/${starttime}/${endtime}`)
@@ -46,7 +46,7 @@ function ShowGraph(){
     return(
       
         <Container>
-        <Form onSubmit={handleSubmit} style={{ width: "30rem" }}>
+        <Form onSubmit={HandleSubmit} style={{ width: "30rem" }}>
         <Form.Label>Process</Form.Label>
         <Form.Select aria-label="Default select example" onChange={processChangeHandler}>
              <option>Open this to select Process</option>
