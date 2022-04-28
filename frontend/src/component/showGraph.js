@@ -25,7 +25,6 @@ function ShowGraph(){
     
     const handleSubmit = (event) => {
         event.preventDefault();
-        if (starttime > endtime && starttime < 0 && endtime <= 0 ){
             fetch('http://localhost:3001/venues/add', {
                 method: 'POST',
                 headers: {
@@ -36,10 +35,7 @@ function ShowGraph(){
             .catch(error => {
               console.error("There was an Error",error);
             });
-        }
-        else {
-            alert("NO NO NO");
-        }
+        
     }
     //const submitHandler = (event) => {  // add submit here
        // event.preventDefault();
