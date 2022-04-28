@@ -1,7 +1,7 @@
 import React, { useEffect }  from "react";
 import { useState } from "react";
 import { Container, Form, FormGroup } from "react-bootstrap";
-import { AiFillEye } from "react-icons/ai";
+import { AiFillEye,AiFillEyeInvisible } from "react-icons/ai";
 
 function SignupForm(){
     [showpassword,setShowPassword] = useState(false);

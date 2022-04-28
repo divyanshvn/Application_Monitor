@@ -22,7 +22,7 @@ const [processname, setprocessname] = useState('');
         event.preventDefault();
         const check = Number(threshold);
         if (Number.isInteger(check)){
-            fetch('http://localhost:3001/venues/add', {
+            fetch('http://localhost:3001/threshold_check', {
                 method: 'POST',
                 headers: {
                   'Content-Type': 'application/json',

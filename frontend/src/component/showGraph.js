@@ -7,6 +7,8 @@ function ShowGraph(){
     const [metricname, setMetricName] = useState('');
     const [starttime, setStartTime] = useState('');
     const [endtime,setEndTime] = useState('');
+    const [datas,setData] = useState([]);
+
     const processChangeHandler = (event) => {
         setprocessname(event.target.value);
     }
@@ -25,17 +27,15 @@ function ShowGraph(){
     
     const handleSubmit = (event) => {
         event.preventDefault();
-            fetch('http://localhost:3001/venues/add', {
-                method: 'POST',
-                headers: {
-                  'Content-Type': 'application/json',
-                },
-                body: JSON.stringify({processname,metricname,starttime,endtime}),
-            })
-            .catch(error => {
-              console.error("There was an Error",error);
-            });
-        
+        useEffect(() => {
+          fetch(`http://localhost:3001/${processname}/${metricname}/${starttime}/${endtime}`)
+          .then(res => res.json())
+          .then(data => {
+              //printBoxes(data, setX);
+              setData(data);
+              console.log(data);
+         })
+        }, []);
     }
     //const submitHandler = (event) => {  // add submit here
        // event.preventDefault();
