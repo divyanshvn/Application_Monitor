@@ -42,12 +42,14 @@ function App() {
       <div className='App'>
 
       <div className="sidenavbar">
+            
             {currentUser ? (<div>
+              <div style={{color:"white"}}>Application Monitor</div>
             <a href="/home">Home</a>
             <a href="/generategraph">Generate Graph</a>
             <a href="/thresholdform">Set Threshold</a>
             <button onClick={logoutSite}>Logout</button>
-            </div>):(<div></div>)}
+            </div>):(<div style={{color:"white"}}>Application Monitor</div>)}
             
         </div>
       {/*<MyRoute/>*/}

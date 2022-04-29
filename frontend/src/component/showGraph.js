@@ -2,6 +2,7 @@ import React, { useEffect, useState } from "react";
 import { Form, Button, Container, Alert } from 'react-bootstrap';
 import { processlist, cpulist, disklist, diskIolist, internetlist, dockerlist, postgreslist, systemList, wirelessList } from './constant';
 import { Bar, Line } from 'react-chartjs-2';
+import AuthService from "./services/auth.service";
 
 const Options = {
   plugins: {
@@ -47,6 +48,8 @@ function ShowGraph() {
   }
 
   async function fetchData() {
+    const user = AuthService.getCurrentUser();
+    if (user){
     setInterval(() => {
       fetch(`http://localhost:3001/graph/${processname}/${metricname}/${starttime}/${endtime}`)
         .then(res => res.json())
@@ -64,6 +67,10 @@ function ShowGraph() {
           console.log(data);
         })
     }, 10000)
+   }
+   else{
+    window.location.href='/';
+   }
   }
 
   useEffect(() => {
