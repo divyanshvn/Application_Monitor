@@ -6,7 +6,7 @@ CREATE TABLE   users (
     name TEXT,
     email TEXT,
     password TEXT,
-    last_update TEXT,
+    -- last_update TEXT,
     Primary key(user_id)
 );
 
