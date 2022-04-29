@@ -55,7 +55,7 @@ function ShowGraph() {
         .then(res => res.json())
         .then(data => {
           var x = data["time"];
-          var y = data["vals"];
+          var y = data["value"];
           console.log(data);
           // data.map((item, index) => {
           //   x.push(item.time);
