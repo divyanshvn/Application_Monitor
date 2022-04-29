@@ -16,11 +16,13 @@ import LoginForm from './component/LoginForm';
 import LandingPage from './component/landingpage';
 import AuthService from "./component/services/auth.service";
 import { useNavigate } from "react-router-dom";
+import DefaultUI from './component/defaultUI';
 
 
 function App() {
   const [currentUser, setCurrentUser] = useState(undefined);
   useEffect(() => {
+    document.body.style.backgroundColor = "#07070e"
     const user = AuthService.getCurrentUser();
     console.log(user,15);
     if (user) {

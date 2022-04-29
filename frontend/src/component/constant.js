@@ -1,5 +1,5 @@
 export const processlist = [{value:'cpu',text:'CPU'},{value:'disk',text:'Disk'},{value:'diskio',text:'DiskIo'},{value:'docker',text:'Docker'},
-{value:'internetspeed',text:'Internet Speed'},{value:'postgres',text:'PostgresSql'},{value:'system',text:'System'}
+{value:'internet_speed',text:'Internet Speed'},{value:'postgres',text:'PostgresSql'},{value:'system',text:'System'}
 ,{value:'wireless',text:'Wireless'}];
 
 export const cpulist = [{value:'',text:'Choose metric'},{value:'sys_num',text:'system number'},{value:'cpu_id',text:'Cpu id'},{value:'time_user',text:'time user'},{value:'time_system',text:'time system'},

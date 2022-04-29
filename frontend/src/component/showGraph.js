@@ -4,7 +4,7 @@ import { processlist, cpulist, disklist, diskIolist, internetlist, dockerlist, p
 import { Bar, Line } from 'react-chartjs-2';
 import AuthService from "./services/auth.service";
 
-const Options = {
+/*const Options = {
   plugins: {
     title: {
       display: true,
@@ -17,7 +17,7 @@ const Options = {
     responsive: true,
     maintainAspectRatio: true,
   }
-}
+}*/
 
 
 
@@ -49,20 +49,31 @@ function ShowGraph() {
 
   async function fetchData() {
     const user = AuthService.getCurrentUser();
+    const show_length = 50;
     if (user){
     setInterval(() => {
       fetch(`http://localhost:3001/graph/${processname}/${metricname}/${starttime}/${endtime}`)
         .then(res => res.json())
         .then(data => {
           var x = data["time"];
-          var y = data["vals"];
-          console.log(data);
+          var y = data["value"];
+         // console.log(data);
           // data.map((item, index) => {
           //   x.push(item.time);
           //   y.push(item.value);
           // })
-          setData(y);
-          setLabels(x);
+          var xnew ;
+          var ynew;
+          if (x.length > show_length){
+            xnew = x.slice(x.length - show_length,x.length);
+            ynew = y.slice(y.length - show_length,y.length)
+          }
+          else{
+            xnew = x;
+            ynew = y;
+          }
+          setData(ynew);
+          setLabels(xnew);
           setGetGraph(true);
           console.log(data);
         })
@@ -85,7 +96,7 @@ function ShowGraph() {
   // event.preventDefault();
   //   alert("thankyou");
   // }
-  const datas = {
+  /*const datas = {
     labels: label,
     datasets: [
       {
@@ -93,13 +104,52 @@ function ShowGraph() {
         data: data
       }
     ]
+  }*/
+  const Options = {
+    responsive: true,
+    plugins: {
+      title: {
+        display: true,
+        text: "Metric V/s Time",
+        font: {
+            size: 16
+        },
+        color:"white",
+      },
+      legend: {
+        display: false,
+        position: "left",
+        labels: {
+            color:"white",
+        },
+      },
+      responsive: true,
+      maintainAspectRatio: true,
+      
+
+    }
   }
+const datas = {
+labels: label,
+color:"white",
+datasets: [
+{
+data: data,
+backgroundColor: "pink",
+borderColor: "pink",
+color:"white",
+lineWidth: 2,
+borderWidth: 2 ,
+}
+]
+}
 
 
   return (
 
     <Container>
-      <Form onSubmit={HandleSubmit} style={{ width: "30rem" }}>
+      <div className="graphformdiv">
+      <Form onSubmit={HandleSubmit} className="graphform" >
         <Form.Label>Process</Form.Label>
         <Form.Select aria-label="Default select example" onChange={processChangeHandler}>
           <option>Open this to select Process</option>
@@ -187,9 +237,10 @@ function ShowGraph() {
           <Form.Label>TimeStamp End</Form.Label>
           <Form.Control type="int" placeholder="Enter End Time" required onChange={endChangeHandler} />
         </Form.Group>
-        <Button type='submit'>Get Graph</Button>
+        <Button type='submit' className="graphbutton">Get Graph</Button>
       </Form>
-      {getgraph ? (<div><Line data={datas} options={Options} /></div>) : (<div></div>)}
+      </div>
+      {getgraph ? (<div className="generatedgraph"><Line data={datas} options={Options} /></div>) : (<div></div>)}
     </Container>
 
   );

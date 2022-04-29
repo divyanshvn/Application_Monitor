@@ -40,7 +40,8 @@ const [processname, setprocessname] = useState('');
 return(
       
         <Container>
-        <Form onSubmit={handleSubmit}>
+        <div className="graphformdiv">
+        <Form onSubmit={handleSubmit} className="graphform">
         <Form.Label>Process</Form.Label>
         <Form.Select aria-label="Default select example" onChange={processChangeHandler}>
              <option>Open this to select Process</option>
@@ -124,8 +125,9 @@ return(
               <Form.Label>Threshold</Form.Label>
               <Form.Control type="int" placeholder="Set Threshold" required onChange={thresholdChangeHandler}/>
           </Form.Group>
-          <Button type='submit' >Set Threshold</Button>
+          <Button type='submit' className="graphbutton">Set Threshold</Button>
         </Form>
+        </div>
       </Container>
     
       );

@@ -1,12 +1,13 @@
 import React, { useEffect }  from "react";
-import SignupForm from "./signupForm";
+import DefaultUI from "./defaultUI";
+import AuthService from "./services/auth.service";
 
 function Home(){
+    const user = AuthService.getCurrentUser();
 return(
     <div>
-        <div>This is Home</div>
-        <a href="/login">Sign In</a>
-        <a href="/signup">Sign Up</a>
+        <div>Hello {user.id} </div>
+        <DefaultUI/>
     </div>
      );
 }
