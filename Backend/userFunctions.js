@@ -7,7 +7,7 @@ const connection = new Client({
     user: 'postgres',
     host: 'localhost',
     database: 'userdb',
-    password: 'monu4702',
+    password: 'root',
     port: 5432
 })
 
@@ -61,9 +61,10 @@ const register_user = async (req, res) => {
 
         var rows3 = await connection.query(query1, [email])
         var id1 = rows3["rows"][0].user_id;
+        var name1 = rows3["rows"][0].name;
         console.log(`Id is ${id1}`);
 
-        var x = { "status": "User Created", "id": id1 , "proceed": 1};
+        var x = { "status": "User Created", "id": id1 , "name" : name, "proceed": 1};
         res.send(x);
     }
     catch(err){
@@ -94,7 +95,7 @@ const userAuth = async (req, res) => {
             return res.status(401).json({ error: 'Incorrect Password' });
         }
         else {
-            var x = { "proceed": 1, "status": "Nice", id: rows["rows"][0].user_id };
+            var x = { "proceed": 1, "status": "Nice", "id": rows["rows"][0].user_id,  "name": rows["rows"][0].name};
             res.send(x);
         }
     }
