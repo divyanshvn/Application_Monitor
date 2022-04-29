@@ -25,9 +25,10 @@ const connection = new Client({
   user: 'postgres',
   host: 'localhost',
   database: 'userdb',
-  password: 'root',
+  password: 'king.1234',
   port: 5432
 })
+
 connection.connect();
 
 const check_helper = async (i, n, time_start, rows2, fluxQuery, l) => {
