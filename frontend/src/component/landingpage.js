@@ -4,8 +4,10 @@ function LandingPage(){
     return(
     <div>
         <div>Landing Page</div>
-        <a href="/login">Sign In</a>
-        <a href="/signup">Sign Up</a>
+        <div>
+         <a href="/login" className="ldbutton">Sign In</a>
+         <a href="/signup" className="ldbutton">Sign Up</a>
+        </div>
     </div>)
 }
 
