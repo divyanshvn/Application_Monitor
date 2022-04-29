@@ -6,11 +6,6 @@ const res = require('express/lib/response');
 const { Client } = require('pg');
 const { Connection } = require('pg');
 
-// const INFLUX_ORG = "MyDB"
-// const INFLUX_BUCKET = "MyBucket1"
-// const INFLUX_TOKEN = "vOFwtnaq3Op08NBRo3JmLg21oA4Xcj_NV7FMOsFuwVfJ35DPzU77FWMkTMYv7HPe1s-hCxh4ulPdEweSDHV0SA=="
-// const INFLUX_URL = "http://localhost:8086"
-
 // influxdb
 const url = process.env.INFLUX_URL || ''
 const token = process.env.INFLUX_API_TOKEN

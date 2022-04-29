@@ -46,7 +46,7 @@ return(
         <Form.Select aria-label="Default select example" onChange={processChangeHandler}>
              <option>Open this to select Process</option>
              {processlist.map(item => {
-                  return (<option value={item.value}>{item.text}</option>);
+                  return (<option value={item.value} key={item.value}>{item.text}</option>);
               })}
         </Form.Select>
         <Form.Label>Metric</Form.Label>
@@ -59,21 +59,21 @@ return(
                          return(
                             cpulist.map(item => {
                                 return(
-                                <option value={item.value}>{item.text}</option>);
+                                <option value={item.value} key={item.value}>{item.text}</option>);
                             })
                          )
                         } else if (processname ==='disk') {
                             return (
                               disklist.map(item => {
                                    return(
-                                    <option value={item.value}>{item.text}</option>); 
+                                    <option value={item.value} key={item.value}>{item.text}</option>); 
                               })
                             )
                         } else if (processname ==='diskio') {
                             return (
                               diskIolist.map(item => {
                                    return(
-                                    <option value={item.value}>{item.text}</option>); 
+                                    <option value={item.value} key={item.value}>{item.text}</option>); 
                               })
                             )
                         }
@@ -81,35 +81,35 @@ return(
                             return (
                               dockerlist.map(item => {
                                    return(
-                                    <option value={item.value}>{item.text}</option>); 
+                                    <option value={item.value} key={item.value}>{item.text}</option>); 
                               })
                             )
                         }else if (processname ==='internetspeed') {
                             return (
                               internetlist.map(item => {
                                    return(
-                                    <option value={item.value}>{item.text}</option>); 
+                                    <option value={item.value} key={item.value}>{item.text}</option>); 
                               })
                             )
                         }else if (processname ==='postgres') {
                             return (
                               postgreslist.map(item => {
                                    return(
-                                    <option value={item.value}>{item.text}</option>); 
+                                    <option value={item.value} key={item.value}>{item.text}</option>); 
                               })
                             )
                         }else if (processname ==='system') {
                             return (
                               systemList.map(item => {
                                    return(
-                                    <option value={item.value}>{item.text}</option>); 
+                                    <option value={item.value} key={item.value}>{item.text}</option>); 
                               })
                             )
                         }else if (processname ==='wireless') {
                             return (
                               wirelessList.map(item => {
                                    return(
-                                    <option value={item.value}>{item.text}</option>); 
+                                    <option value={item.value} key={item.value}>{item.text}</option>); 
                               })
                             )
                         }
