@@ -6,7 +6,8 @@ CREATE TABLE   users (
     name TEXT,
     email TEXT,
     password TEXT,
-    Primary key(user_id) 
+    last_update TEXT,
+    Primary key(user_id)
 );
 
 CREATE TABLE    checks (
