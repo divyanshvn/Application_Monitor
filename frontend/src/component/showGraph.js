@@ -5,6 +5,7 @@ import { Bar, Line } from 'react-chartjs-2';
 import AuthService from "./services/auth.service";
 
 
+var myTimer;
 function ShowGraph() {
   const [processname, setprocessname] = useState('');
   const [metricname, setMetricName] = useState('');
@@ -14,7 +15,6 @@ function ShowGraph() {
   const [label, setLabels] = useState([]);
   const [getgraph, setGetGraph] = useState(false);
   const [sendrequest,setRequest] = useState(false);
-  var myTimer;
 
   const processChangeHandler = (event) => {
     setprocessname(event.target.value);
@@ -38,6 +38,7 @@ function ShowGraph() {
     
     if (user){
       if(sendrequest){
+      console.log("My Timer", myTimer);
       clearInterval(myTimer);
       myTimer = setInterval(() => {
       fetch(`http://localhost:3001/graph/${processname}/${metricname}/${starttime}/${endtime}`)
@@ -48,9 +49,6 @@ function ShowGraph() {
 
           var xnew ;
           var ynew;
-          // console.log(x.length);
-          // console.log(x[0]);
-          // console.log(x[x.length-1]);
           if (x.length > show_length){
             xnew = x.slice(0, show_length);
             ynew = y.slice(0, show_length);
@@ -62,7 +60,7 @@ function ShowGraph() {
           setData(ynew);
           setLabels(xnew);
           setGetGraph(true);
-          console.log(data);
+          // console.log(data);
         })
     }, 3000)
   }
@@ -81,19 +79,7 @@ function ShowGraph() {
     event.preventDefault();
     fetchData();
   }
-  //const submitHandler = (event) => {  // add submit here
-  // event.preventDefault();
-  //   alert("thankyou");
-  // }
-  /*const datas = {
-    labels: label,
-    datasets: [
-      {
-        label: "Metric Value",
-        data: data
-      }
-    ]
-  }*/
+
   const Options = {
     responsive: true,
     plugins: {
@@ -116,6 +102,7 @@ function ShowGraph() {
       maintainAspectRatio: true,
     },
   };
+
 const datas = {
 labels: label,
 color:"white",
@@ -140,7 +127,7 @@ borderWidth: 2 ,
         <Form.Select aria-label="Default select example" onChange={processChangeHandler}>
           <option>Open this to select Process</option>
           {processlist.map(item => {
-            return (<option value={item.value}>{item.text}</option>);
+            return (<option value={item.value} key={item.value}>{item.text}</option>);
           })}
         </Form.Select>
         <Form.Label>Metric</Form.Label>
@@ -153,21 +140,21 @@ borderWidth: 2 ,
                 return (
                   cpulist.map(item => {
                     return (
-                      <option value={item.value}>{item.text}</option>);
+                      <option value={item.value} key={item.value}>{item.text}</option>);
                   })
                 )
               } else if (processname === 'disk') {
                 return (
                   disklist.map(item => {
                     return (
-                      <option value={item.value}>{item.text}</option>);
+                      <option value={item.value} key={item.value}>{item.text}</option>);
                   })
                 )
               } else if (processname === 'diskio') {
                 return (
                   diskIolist.map(item => {
                     return (
-                      <option value={item.value}>{item.text}</option>);
+                      <option value={item.value} key={item.value}>{item.text}</option>);
                   })
                 )
               }
@@ -175,35 +162,35 @@ borderWidth: 2 ,
                 return (
                   dockerlist.map(item => {
                     return (
-                      <option value={item.value}>{item.text}</option>);
+                      <option value={item.value} key={item.value}>{item.text}</option>);
                   })
                 )
               } else if (processname === 'internet_speed') {
                 return (
                   internetlist.map(item => {
                     return (
-                      <option value={item.value}>{item.text}</option>);
+                      <option value={item.value} key={item.value}>{item.text}</option>);
                   })
                 )
               } else if (processname === 'postgres') {
                 return (
                   postgreslist.map(item => {
                     return (
-                      <option value={item.value}>{item.text}</option>);
+                      <option value={item.value} key={item.value}>{item.text}</option>);
                   })
                 )
               } else if (processname === 'system') {
                 return (
                   systemList.map(item => {
                     return (
-                      <option value={item.value}>{item.text}</option>);
+                      <option value={item.value} key={item.value}>{item.text}</option>);
                   })
                 )
               } else if (processname === 'wireless') {
                 return (
                   wirelessList.map(item => {
                     return (
-                      <option value={item.value}>{item.text}</option>);
+                      <option value={item.value} key={item.value}>{item.text}</option>);
                   })
                 )
               }
