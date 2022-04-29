@@ -10,5 +10,5 @@ router.post('/add_check/', AlertFunc.add_check)
 router.post('/user/register/', UserFunctions.register_user)
 router.post('/user/login', UserFunctions.userAuth)
 router.post('/check/', AlertFunc.check_data)
-
+router.get('/list_checks/:id', AlertFunc.list_alerts)
 module.exports = router;

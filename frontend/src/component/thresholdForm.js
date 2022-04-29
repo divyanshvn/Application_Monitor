@@ -8,7 +8,7 @@ function ThresholdForm(){
 const [processname, setprocessname] = useState('');
     const [metricname, setMetricName] = useState('');
     const [threshold, setThreshold] = useState('');
-    const user = AuthService.getCurrentUser()["name"];
+    const user = AuthService.getCurrentUser()["id"];
     const processChangeHandler = (event) => {
         setprocessname(event.target.value);
     }
@@ -24,7 +24,7 @@ const [processname, setprocessname] = useState('');
         event.preventDefault();
         const check = Number(threshold);
         if (Number.isInteger(check)){
-            fetch('http://localhost:3001/check/', {
+            fetch('http://localhost:3001/add_check/', {
                 method: 'POST',
                 headers: {
                   'Content-Type': 'application/json',

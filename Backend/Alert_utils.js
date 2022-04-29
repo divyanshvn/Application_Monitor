@@ -27,21 +27,23 @@ const connection = new Client({
   user: 'postgres',
   host: 'localhost',
   database: 'userdb',
-  password: 'monu4702',
+  password: 'root',
   port: 5432
 })
 connection.connect();
 
 const list_alerts = async (req,res) => {
-    const user_id = req.body.id;
+    const user_id = parseInt(req.params.id);
     const query1 = `
-    SELECT process, metric, threshold from checks
-    where user_id == $1
+    SELECT user_id as user, process, metric, threshold from checks
+    where user_id = $1
     `;
+    // console.log(user_id);
     try{
-        const rows = await connection.query(query1);
+        // console.log(query1,user_id);
+        var rows = await connection.query(query1,[user_id]);
         rows = rows["rows"];
-
+        // console.log(rows);
         var x = {"alerts": rows};
         res.send(x);
     }
@@ -49,6 +51,7 @@ const list_alerts = async (req,res) => {
     {
         console.log(err);
     }
+    // res.send({"alerts":[]})
 }
 
 // const check_helper = async (i, n, time_start, rows2, fluxQuery, new_start) => {
@@ -128,11 +131,13 @@ const check_helper1 = async ( row, time_start) => {
 
 
 const add_check = async (req, res) => {
-    var metric = req.body.metric;
-    var threshold_val = parseInt(req.body.value);
+    console.log(req.body)
+    var metric = req.body.metricname;
+    var threshold_val = parseInt(req.body.threshold);
     var user_id = req.body.user;
-    var process = req.body.process;
+    var process = req.body.processname;
 
+    // console.log(`${threshold_val}, ${user_id} TERRE`);
     const query = `
     insert into checks(user_id,process,metric,threshold) values ($1,$2,$3,$4)
     `
@@ -140,6 +145,7 @@ const add_check = async (req, res) => {
 
         const rows = await connection.query(query, [user_id, process, metric, threshold_val])
         var x = { status: "New Threshold check Added", proceed: 1 };
+        console.log("New Threshold Check Added");
         res.send(x);
 
     }
@@ -151,11 +157,13 @@ const add_check = async (req, res) => {
 const check_data = async (req, res) => {
     // console.log(req.params.id);
     // console.log("HELLLLLLOOOOO");
-    var user_id = parseInt(req.body.id);
+    // console.log("TYTYTTYT");
+    var user_id = parseInt(req.body.user);
     var process = req.body.process;
     var metric = req.body.metric;
-    var threshold = req.body.threshold;
+    var threshold = parseInt(req.body.threshold);
 
+    console.log(`threshold: ${threshold}, user_id: ${user_id}`);
     const query1 = `
         UPDATE checks
         SET last_update = $4
@@ -173,6 +181,7 @@ const check_data = async (req, res) => {
 
     try {
         var rows1 = await connection.query(query2, [user_id,process,metric]);
+        console.log(rows1["rows"],`${user_id},${process},${metric}`);
         const recent_update = rows1["rows"][0]["last_update"];
     
         // const recent_update = "-14";
@@ -262,4 +271,5 @@ const check_data = async (req, res) => {
 module.exports = {
     check_data,
     add_check,
+    list_alerts
 }
