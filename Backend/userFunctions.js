@@ -7,7 +7,7 @@ const connection = new Client({
     user: 'postgres',
     host: 'localhost',
     database: 'userdb',
-    password: 'root',
+    password: 'monu4702',
     port: 5432
 })
 
@@ -34,6 +34,8 @@ const register_user = async (req, res) => {
     var email = req.body.email;
     var password = req.body.password;
     
+    console.log(`Name: ${name} , password: ${password}, email: ${email}`);
+
     try{
         var query1 = `
             select * 
