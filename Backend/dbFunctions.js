@@ -6,11 +6,6 @@ const res = require('express/lib/response');
 const { Client } = require('pg');
 const { Connection } = require('pg');
 
-// const INFLUX_ORG = "MyDB"
-// const INFLUX_BUCKET = "MyBucket1"
-// const INFLUX_TOKEN = "vOFwtnaq3Op08NBRo3JmLg21oA4Xcj_NV7FMOsFuwVfJ35DPzU77FWMkTMYv7HPe1s-hCxh4ulPdEweSDHV0SA=="
-// const INFLUX_URL = "http://localhost:8086"
-
 // influxdb
 const url = process.env.INFLUX_URL || ''
 const token = process.env.INFLUX_API_TOKEN
@@ -26,43 +21,10 @@ const connection = new Client({
   user: 'postgres',
   host: 'localhost',
   database: 'userdb',
-  password: 'monu4702',
+  password: 'king.1234',
   port: 5432
 })
 connection.connect();
-
-// const check_helper = async (i, n, time_start, rows2, fluxQuery, new_start) => {
-//   queryApi.queryRows(fluxQuery, {
-//     next(row, tableMeta) {
-//       const o = tableMeta.toObject(row)
-//       const process = rows2[i]["process"];
-//       const metric = rows2[i]["metric"];
-//       const threshold = rows2[i]["threshold"];
-
-//       var x1 = o._value;
-//       var t1 = o._time;
-      
-//       new_start = t1;
-
-//       if(x1 > threshold){
-//         l.push(`Metric ${metric} of process ${process} has value ${x1} greater than threshold ${threshold} at time ${t1} `);
-//       }
-//     },
-//     error(error) {
-//       console.error(error)
-//       console.log('\nFinished ERROR')
-//     },
-//     complete() {
-//       if(i == n-1){
-//         return new_start;
-//       }
-//       var _x = await check_helper(i+1,n,time_start,rows2,fluxQuery, new_start);
-//       // console.log('\nFinished SUCCESS');
-//       return _x;
-//     },
-
-//   })
-// }
 
 var new_start = "-14w";
 
@@ -235,4 +197,38 @@ const check_data = async (req, res) => {
 //   graph_data,
 //   add_check,
 //   check_data,
+// }
+
+
+// const check_helper = async (i, n, time_start, rows2, fluxQuery, new_start) => {
+//   queryApi.queryRows(fluxQuery, {
+//     next(row, tableMeta) {
+//       const o = tableMeta.toObject(row)
+//       const process = rows2[i]["process"];
+//       const metric = rows2[i]["metric"];
+//       const threshold = rows2[i]["threshold"];
+
+//       var x1 = o._value;
+//       var t1 = o._time;
+      
+//       new_start = t1;
+
+//       if(x1 > threshold){
+//         l.push(`Metric ${metric} of process ${process} has value ${x1} greater than threshold ${threshold} at time ${t1} `);
+//       }
+//     },
+//     error(error) {
+//       console.error(error)
+//       console.log('\nFinished ERROR')
+//     },
+//     complete() {
+//       if(i == n-1){
+//         return new_start;
+//       }
+//       var _x = await check_helper(i+1,n,time_start,rows2,fluxQuery, new_start);
+//       // console.log('\nFinished SUCCESS');
+//       return _x;
+//     },
+
+//   })
 // }

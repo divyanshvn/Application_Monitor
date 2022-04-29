@@ -4,24 +4,8 @@ import { processlist, cpulist, disklist, diskIolist, internetlist, dockerlist, p
 import { Bar, Line } from 'react-chartjs-2';
 import AuthService from "./services/auth.service";
 
-/*const Options = {
-  plugins: {
-    title: {
-      display: true,
-      text: "mAtch vs something"
-    },
-    legend: {
-      display: false,
-      position: "left"
-    },
-    responsive: true,
-    maintainAspectRatio: true,
-  }
-}*/
 
-
-
-
+var myTimer;
 function ShowGraph() {
   const [processname, setprocessname] = useState('');
   const [metricname, setMetricName] = useState('');
@@ -30,6 +14,7 @@ function ShowGraph() {
   const [data, setData] = useState([]);
   const [label, setLabels] = useState([]);
   const [getgraph, setGetGraph] = useState(false);
+  const [sendrequest,setRequest] = useState(false);
 
   const processChangeHandler = (event) => {
     setprocessname(event.target.value);
@@ -50,23 +35,23 @@ function ShowGraph() {
   async function fetchData() {
     const user = AuthService.getCurrentUser();
     const show_length = 50;
+    
     if (user){
-    setInterval(() => {
+      if(sendrequest){
+      console.log("My Timer", myTimer);
+      clearInterval(myTimer);
+      myTimer = setInterval(() => {
       fetch(`http://localhost:3001/graph/${processname}/${metricname}/${starttime}/${endtime}`)
         .then(res => res.json())
         .then(data => {
           var x = data["time"];
           var y = data["value"];
-         // console.log(data);
-          // data.map((item, index) => {
-          //   x.push(item.time);
-          //   y.push(item.value);
-          // })
+
           var xnew ;
           var ynew;
           if (x.length > show_length){
-            xnew = x.slice(x.length - show_length,x.length);
-            ynew = y.slice(y.length - show_length,y.length)
+            xnew = x.slice(0, show_length);
+            ynew = y.slice(0, show_length);
           }
           else{
             xnew = x;
@@ -75,9 +60,10 @@ function ShowGraph() {
           setData(ynew);
           setLabels(xnew);
           setGetGraph(true);
-          console.log(data);
+          // console.log(data);
         })
     }, 3000)
+  }
    }
    else{
     window.location.href='/';
@@ -89,46 +75,34 @@ function ShowGraph() {
   }, [])
 
   const HandleSubmit = (event) => {
+    setRequest(true);
     event.preventDefault();
     fetchData();
   }
-  //const submitHandler = (event) => {  // add submit here
-  // event.preventDefault();
-  //   alert("thankyou");
-  // }
-  /*const datas = {
-    labels: label,
-    datasets: [
-      {
-        label: "Metric Value",
-        data: data
-      }
-    ]
-  }*/
+
   const Options = {
     responsive: true,
     plugins: {
       title: {
         display: true,
-        text: "Metric V/s Time",
+        text: `${metricname} V/s Time`,
         font: {
-            size: 16
+          size: 16,
         },
-        color:"white",
+        color: "white",
       },
       legend: {
         display: false,
         position: "left",
         labels: {
-            color:"white",
+          color: "white",
         },
       },
       responsive: true,
       maintainAspectRatio: true,
-      
+    },
+  };
 
-    }
-  }
 const datas = {
 labels: label,
 color:"white",
@@ -144,7 +118,6 @@ borderWidth: 2 ,
 ]
 }
 
-
   return (
 
     <Container>
@@ -154,7 +127,7 @@ borderWidth: 2 ,
         <Form.Select aria-label="Default select example" onChange={processChangeHandler}>
           <option>Open this to select Process</option>
           {processlist.map(item => {
-            return (<option value={item.value}>{item.text}</option>);
+            return (<option value={item.value} key={item.value}>{item.text}</option>);
           })}
         </Form.Select>
         <Form.Label>Metric</Form.Label>
@@ -167,21 +140,21 @@ borderWidth: 2 ,
                 return (
                   cpulist.map(item => {
                     return (
-                      <option value={item.value}>{item.text}</option>);
+                      <option value={item.value} key={item.value}>{item.text}</option>);
                   })
                 )
               } else if (processname === 'disk') {
                 return (
                   disklist.map(item => {
                     return (
-                      <option value={item.value}>{item.text}</option>);
+                      <option value={item.value} key={item.value}>{item.text}</option>);
                   })
                 )
               } else if (processname === 'diskio') {
                 return (
                   diskIolist.map(item => {
                     return (
-                      <option value={item.value}>{item.text}</option>);
+                      <option value={item.value} key={item.value}>{item.text}</option>);
                   })
                 )
               }
@@ -189,35 +162,35 @@ borderWidth: 2 ,
                 return (
                   dockerlist.map(item => {
                     return (
-                      <option value={item.value}>{item.text}</option>);
+                      <option value={item.value} key={item.value}>{item.text}</option>);
                   })
                 )
-              } else if (processname === 'internetspeed') {
+              } else if (processname === 'internet_speed') {
                 return (
                   internetlist.map(item => {
                     return (
-                      <option value={item.value}>{item.text}</option>);
+                      <option value={item.value} key={item.value}>{item.text}</option>);
                   })
                 )
               } else if (processname === 'postgres') {
                 return (
                   postgreslist.map(item => {
                     return (
-                      <option value={item.value}>{item.text}</option>);
+                      <option value={item.value} key={item.value}>{item.text}</option>);
                   })
                 )
               } else if (processname === 'system') {
                 return (
                   systemList.map(item => {
                     return (
-                      <option value={item.value}>{item.text}</option>);
+                      <option value={item.value} key={item.value}>{item.text}</option>);
                   })
                 )
               } else if (processname === 'wireless') {
                 return (
                   wirelessList.map(item => {
                     return (
-                      <option value={item.value}>{item.text}</option>);
+                      <option value={item.value} key={item.value}>{item.text}</option>);
                   })
                 )
               }
