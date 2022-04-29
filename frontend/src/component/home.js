@@ -7,7 +7,7 @@ function Home(){
     console.log(user,19);
 return(
     <div>
-        <div>Hello {user["name"]} </div>
+        <div className="hometitle">Welcome {user["name"]} in Application Monitor</div>
         <DefaultUI/>
     </div>
      );

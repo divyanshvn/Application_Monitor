@@ -83,7 +83,8 @@ function LoginForm(){
     return (
         <Container>
             {error && <ErrorMessage variant="danger">{error}</ErrorMessage>}
-            <Form onSubmit={HandleSubmit}>
+            <div className="graphformdiv">
+            <Form onSubmit={HandleSubmit} className="graphform">
                 <Form.Group  controlId="form.email">
                     <Form.Label>Email ID</Form.Label>
                     <Form.Control type="email" placeholder="Enter Your Email ID" required onChange={emailChangeHandler} />
@@ -92,8 +93,9 @@ function LoginForm(){
                     <Form.Label>Password</Form.Label>
                     <Form.Control type="password" placeholder="Enter Your Password" required onChange={passwordChangeHandler}/>
                 </Form.Group>
-                <Button type='submit'>Log In!</Button>
+                <Button type='submit' className="graphbutton">Log In!</Button>
             </Form>
+            </div>
         </Container>
     )
 }

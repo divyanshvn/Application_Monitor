@@ -47,12 +47,12 @@ function App() {
         <div className="sidenavbar">
 
           {currentUser ? (<div>
-            <div style={{ color: "white" }}>Application Monitor</div>
+            <div className="subtitle">Application Monitor</div>
             <a href="/home">Home</a>
             <a href="/generategraph">Generate Graph</a>
             <a href="/thresholdform">Set Threshold</a>
             <a href="/listalerts">Alerts</a>
-            <button onClick={logoutSite}>Logout</button>
+            <button onClick={logoutSite} className='navbutton'>Logout</button>
           </div>) : (<div style={{ color: "white" }}>Application Monitor</div>)}
 
         </div>
