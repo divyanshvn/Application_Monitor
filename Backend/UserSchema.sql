@@ -6,7 +6,6 @@ CREATE TABLE   users (
     name TEXT,
     email TEXT,
     password TEXT,
-    last_update TEXT,
     Primary key(user_id)
 );
 
@@ -15,5 +14,12 @@ CREATE TABLE    checks (
     process TEXT,
     metric TEXT,
     threshold INT,
-    Primary key(user_id,process,metric,threshold)
+    last_update TEXT,
+    Primary key(user_id,process,metric)
+);
+
+CREATE TABLE alerts (
+    user_id INT,
+    alert TEXT,
+    Primary key(user_id, alert)
 );
