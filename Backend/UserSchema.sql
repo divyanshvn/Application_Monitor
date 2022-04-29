@@ -19,7 +19,8 @@ CREATE TABLE    checks (
 );
 
 CREATE TABLE alerts (
+    id INT,
     user_id INT,
     alert TEXT,
-    Primary key(user_id, alert)
+    Primary key(id)
 );
