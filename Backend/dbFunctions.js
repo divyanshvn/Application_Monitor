@@ -3,6 +3,7 @@
 const { InfluxDB, Point } = require('@influxdata/influxdb-client');
 const { response, query } = require('express');
 const res = require('express/lib/response');
+const { Client } = require('pg');
 const { Connection } = require('pg');
 
 // const INFLUX_ORG = "MyDB"
@@ -18,6 +19,7 @@ const bucket = process.env.INFLUX_BUCKET || ''
 
 const queryApi = new InfluxDB({ url, token }).getQueryApi(org)
 
+
 // postgresql
 const connection = new Client({
   user: 'postgres',
@@ -27,6 +29,14 @@ const connection = new Client({
   port: 5432
 })
 connection.connect();
+
+const check_helper = async (i, n, time_start, rows2, fluxQuery, l) => {
+  queryApi.queryRows(fluxQuery, {
+    next(row, tableMeta) {
+      
+    }
+  })
+}
 
 const graph_data = (req, res) => {
   var process = (req.params.process);
@@ -86,62 +96,62 @@ const add_check = async (req, res) => {
   const query = `
     insert into checks(user_id,process,metric,value) values ($1,$2,$3,$4)
   `
-  try{
-  
-    const rows = await connection.query(query,[user_id,process,metric,threshold_val])
+  try {
+
+    const rows = await connection.query(query, [user_id, process, metric, threshold_val])
     var x = { status: "New Threshold check Added", proceed: 1 };
     res.send(x);
 
   }
-  catch(err){
+  catch (err) {
     console.log(err);
   }
 }
 
-// const check_data = async (req,res) => {
-//     var user_id = parseInt(req.body.id);
+const check_data = async (req, res) => {
+  var user_id = parseInt(req.body.id);
 
-//     const query1 = `
-//     UPDATE users
-//     SET last_update = $2
-//     WHERE user_id = $1;
-//     `;
+  const query1 = `
+    UPDATE users
+    SET last_update = $2
+    WHERE user_id = $1;
+    `;
 
-//     const query2 = `
-//     select last_update from users
-//     where user_id = $1;
-//     `;
+  const query2 = `
+    select last_update from users
+    where user_id = $1;
+    `;
 
-//     const query3 = `
-//     select process, metric, threshold
-//     from checks
-//     where user_id = $1;
-//     `
+  const query3 = `
+    select process, metric, threshold
+    from checks
+    where user_id = $1;
+    `
 
-//     try {
-//       var rows1 = await connection.query(query2,[user_id]);
-//       const recent_update = rows1["rows"][0];
+  try {
+    var rows1 = await connection.query(query2, [user_id]);
+    const recent_update = rows1["rows"][0];
 
-//       var rows2 = await connection.query(query3,[user_id]);
-//       rows2 = rows2["rows"];
-      
-//       var l = []; 
-//       const fluxQuery = `from(bucket: "${bucket}")\
-//       |> range(start: ${time_start} )\
-//       |> filter(fn: (r) => r["_measurement"] == "${process}")
-//       |> filter(fn: (r) => r["_field"] == "${metric}")`
-    
-//       for(var i = 0; i < rows2.length; i++){
-//         {}
-//       }
+    var rows2 = await connection.query(query3, [user_id]);
+    rows2 = rows2["rows"];
 
-//     }
-//     catch(err){
-//       console.log(err);
-//     }
-// }
+    var l = [];
+    const fluxQuery = `from(bucket: "${bucket}")\
+      |> range(start: ${time_start} )\
+      |> filter(fn: (r) => r["_measurement"] == "${process}")
+      |> filter(fn: (r) => r["_field"] == "${metric}")`
 
-// module.exports = {
-//   graph_data,
-//   add_check,
-// }
+    for (var i = 0; i < rows2.length; i++) {
+      { }
+    }
+
+  }
+  catch (err) {
+    console.log(err);
+  }
+}
+
+module.exports = {
+  graph_data,
+  add_check,
+}
