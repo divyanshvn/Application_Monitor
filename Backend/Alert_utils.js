@@ -163,7 +163,7 @@ const check_data = async (req, res) => {
     var metric = req.body.metric;
     var threshold = parseInt(req.body.threshold);
 
-    console.log(`threshold: ${threshold}, user_id: ${user_id}`);
+    // console.log(`threshold: ${threshold}, user_id: ${user_id}`);
     const query1 = `
         UPDATE checks
         SET last_update = $4
@@ -176,12 +176,12 @@ const check_data = async (req, res) => {
         `;
     
     const query3 = `
-        INSERT INTO alerts VALUES ($1,$2);
+        INSERT INTO alerts(user_id,alert) VALUES ($1,$2);
     `;
 
     try {
         var rows1 = await connection.query(query2, [user_id,process,metric]);
-        console.log(rows1["rows"],`${user_id},${process},${metric}`);
+        // console.log(rows1["rows"],`${user_id},${process},${metric}`);
         const recent_update = rows1["rows"][0]["last_update"];
     
         // const recent_update = "-14";
@@ -207,7 +207,7 @@ const check_data = async (req, res) => {
                 // console.log(`${t1} : ${x1}`);
 
                 new_start = t1;
-                
+                console.log(`val: ${x1}, threshold: ${threshold}`);
                 if(x1 > threshold){
                     var x2 = `Metric ${metric} of process ${process} has value ${x1} greater than threshold ${threshold} at time ${t1} `;
                     try{
@@ -220,6 +220,7 @@ const check_data = async (req, res) => {
                         // res.send({"error":err});
                     }    
                     l.push(x2);
+                    console.log(x2);
                     // console.log(`Metric ${metric} of process ${process} has value ${x1} greater than threshold ${threshold} at time ${t1} `);
                 }
             },

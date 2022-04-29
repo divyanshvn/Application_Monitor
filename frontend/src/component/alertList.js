@@ -11,7 +11,7 @@ function AlertList() {
     const [gotlist, setGotList] = useState([]);
     const [nowcall, setNowCall] = useState(false);
     const user = AuthService.getCurrentUser()["id"];
-    var x = [];
+    var lists = [];
     useEffect(() => {
         setInterval(() => {
             fetch(`http://localhost:3001/list_checks/${user}`)
@@ -29,10 +29,11 @@ function AlertList() {
     }, [])
 
     if (nowcall) {
-        console.log(133);
-        console.log(gotlist);
+        // console.log(133);
+        // console.log(gotlist);
         gotlist.map((item, index) => {
-            console.log("hello");
+            console.log("hell");
+            // console.log(item)
             fetch('http://localhost:3001/check/', {
                 method: 'POST',
                 headers: {
@@ -47,9 +48,14 @@ function AlertList() {
             })
                 .then(res => res.json())
                 .then(data => {
+                    console.log(data);
                     console.log(9);
                     // setGotList(data);
-                    console.log(data, 44);
+                    // console.log(data, 44);
+                    data.map((item1, index1) => {
+                        lists.push(item1);
+                    })
+                    console.log(lists, 123);
                 })
                 .catch(error => {
                     console.error("There was an Error", error);
