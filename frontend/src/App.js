@@ -8,24 +8,58 @@ import Graph from './component/graph';
 import SideBar from './component/sideBar';
 import ThemeProvider from 'react-bootstrap/ThemeProvider';
 import 'bootstrap/dist/css/bootstrap.css';
-import MyRoute from './component/MyRoute';
 import './component/style.css';
 import ShowGraph from './component/showGraph';
 import ThresholdForm from './component/thresholdForm';
+import SignupForm from './component/signupForm';
+import LoginForm from './component/LoginForm';
+import LandingPage from './component/landingpage';
+import AuthService from "./component/services/auth.service";
+import { useNavigate } from "react-router-dom";
+
 
 function App() {
+  const [currentUser, setCurrentUser] = useState(undefined);
+  useEffect(() => {
+    const user = AuthService.getCurrentUser();
+    console.log(user,15);
+    if (user) {
+      console.log(50);
+      setCurrentUser(user);
+    }
+  }, []);
+
+ function logoutSite() {
+    AuthService.logout();
+    setCurrentUser(undefined);
+    window.location.href='/';
+   // navigate("/home");
+ //   window.location.reload();
+}
+
   return (
     <Router>   
       <div className='App'>
 
-      <MyRoute/> 
+      <div className="sidenavbar">
+            {currentUser ? (<div>
+            <a href="/home">Home</a>
+            <a href="/generategraph">Generate Graph</a>
+            <a href="/thresholdform">Set Threshold</a>
+            <button onClick={logoutSite}>Logout</button>
+            </div>):(<div></div>)}
+            
+        </div>
       {/*<MyRoute/>*/}
       
         <Routes>
           <Route path="/graph" element={<Graph/>} />
-          <Route path="/" element={<Home/>} />
+          <Route path="/" element={<LandingPage/>} />
           <Route path="/generategraph" element={<ShowGraph/>}/>
           <Route path="/thresholdform" element={<ThresholdForm/>}/>
+          <Route path="/signup" element={<SignupForm/>}/>
+          <Route path="/login" element={<LoginForm/>}/>
+          <Route path="/home" element={<Home/>}/>
       </Routes>
       </div>
     </Router>

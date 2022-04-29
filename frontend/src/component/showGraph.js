@@ -52,7 +52,8 @@ function ShowGraph() {
         .then(res => res.json())
         .then(data => {
           var x = data["time"];
-          var y = data["value"];
+          var y = data["vals"];
+          console.log(data);
           // data.map((item, index) => {
           //   x.push(item.time);
           //   y.push(item.value);
@@ -62,7 +63,7 @@ function ShowGraph() {
           setGetGraph(true);
           console.log(data);
         })
-    }, 5000)
+    }, 10000)
   }
 
   useEffect(() => {
