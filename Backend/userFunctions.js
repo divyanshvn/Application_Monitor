@@ -54,7 +54,7 @@ const register_user = async (req, res) => {
         const encrypt_pass = await bcrypt.hash(password, 10);
 
         const query2 = `
-        insert into users(name,email,password,last_update) values ($1,$2,$3,-14w)
+        insert into users(name,email,password) values ($1,$2,$3)
         `;
 
         var rows2 = await connection.query(query2, [name, email, encrypt_pass])

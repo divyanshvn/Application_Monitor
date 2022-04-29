@@ -17,6 +17,7 @@ const token = process.env.INFLUX_API_TOKEN
 const org = process.env.INFLUX_ORG || ''
 const bucket = process.env.INFLUX_BUCKET || ''
 
+var new_start = "-14w";
 const queryApi = new InfluxDB({ url, token }).getQueryApi(org)
 
 
@@ -30,13 +31,71 @@ const connection = new Client({
 })
 connection.connect();
 
-const check_helper = async (i, n, time_start, rows2, fluxQuery, l) => {
-  queryApi.queryRows(fluxQuery, {
-    next(row, tableMeta) {
+let l = [];
+
+// const check_helper = async (i, n, time_start, rows2, fluxQuery, new_start) => {
+//   queryApi.queryRows(fluxQuery, {
+//     next(row, tableMeta) {
+//       const o = tableMeta.toObject(row)
+//       const process = rows2[i]["process"];
+//       const metric = rows2[i]["metric"];
+//       const threshold = rows2[i]["threshold"];
+
+//       var x1 = o._value;
+//       var t1 = o._time;
       
-    }
-  })
-}
+//       new_start = t1;
+
+//       if(x1 > threshold){
+//         l.push(`Metric ${metric} of process ${process} has value ${x1} greater than threshold ${threshold} at time ${t1} `);
+//       }
+//     },
+//     error(error) {
+//       console.error(error)
+//       console.log('\nFinished ERROR')
+//     },
+//     complete() {
+//       if(i == n-1){
+//         return new_start;
+//       }
+//       var _x = await check_helper(i+1,n,time_start,rows2,fluxQuery, new_start);
+//       // console.log('\nFinished SUCCESS');
+//       return _x;
+//     },
+
+//   })
+// }
+
+var new_start = "-14w";
+
+// const check_helper1 = async (fluxQuery, row, time_start) => {
+//   var _y = await queryApi.queryRows(fluxQuery, {
+//     next(row, tableMeta) {
+//       const o = tableMeta.toObject(row)
+//       const process = row["process"];
+//       const metric = row["metric"];
+//       const threshold = row["threshold"];
+
+//       var x1 = o._value;
+//       var t1 = o._time;
+      
+//       new_start = t1;
+
+//       if(x1 > threshold){
+//         l.push(`Metric ${metric} of process ${process} has value ${x1} greater than threshold ${threshold} at time ${t1} `);
+//       }
+//     },
+//     error(error) {
+//       console.error(error)
+//       console.log('\nFinished ERROR')
+//     },
+//     complete() {
+//       return;
+//     },
+
+//   });
+//   return;
+// }
 
 const graph_data = (req, res) => {
   var process = (req.params.process);
@@ -81,7 +140,7 @@ const graph_data = (req, res) => {
     complete() {
       console.log(fluxQuery);
       res.send({ "time": time_x, "value": x });
-      console.log('\nFinished SUCCESS')
+      console.log('\nFinished SUCCESS');
     },
   });
 
@@ -108,50 +167,52 @@ const add_check = async (req, res) => {
   }
 }
 
-const check_data = async (req, res) => {
-  var user_id = parseInt(req.body.id);
+// const check_data = async (req, res) => {
+//   var user_id = parseInt(req.body.id);
 
-  const query1 = `
-    UPDATE users
-    SET last_update = $2
-    WHERE user_id = $1;
-    `;
+//   const query1 = `
+//     UPDATE users
+//     SET last_update = $2
+//     WHERE user_id = $1;
+//     `;
 
-  const query2 = `
-    select last_update from users
-    where user_id = $1;
-    `;
+//   const query2 = `
+//     select last_update from users
+//     where user_id = $1;
+//     `;
 
-  const query3 = `
-    select process, metric, threshold
-    from checks
-    where user_id = $1;
-    `
+//   const query3 = `
+//     select process, metric, threshold
+//     from checks
+//     where user_id = $1;
+//     `
 
-  try {
-    var rows1 = await connection.query(query2, [user_id]);
-    const recent_update = rows1["rows"][0];
+//   try {
+//     var rows1 = await connection.query(query2, [user_id]);
+//     const recent_update = rows1["rows"][0];
 
-    var rows2 = await connection.query(query3, [user_id]);
-    rows2 = rows2["rows"];
+//     var rows2 = await connection.query(query3, [user_id]);
+//     rows2 = rows2["rows"];
 
-    var l = [];
-    const fluxQuery = `from(bucket: "${bucket}")\
-      |> range(start: ${time_start} )\
-      |> filter(fn: (r) => r["_measurement"] == "${process}")
-      |> filter(fn: (r) => r["_field"] == "${metric}")`
+//     const fluxQuery = `from(bucket: "${bucket}")\
+//       |> range(start: ${time_start} )\
+//       |> filter(fn: (r) => r["_measurement"] == "${process}")
+//       |> filter(fn: (r) => r["_field"] == "${metric}")`
 
-    for (var i = 0; i < rows2.length; i++) {
-      { }
-    }
+//     l = [];
+//     for(var i = 0; i < rows2.length; i++){
+//       var _x = await check_helper1(fluxQuery,rows2[i],time_start);
+//     }
+    
 
-  }
-  catch (err) {
-    console.log(err);
-  }
-}
+//   }
+//   catch (err) {
+//     console.log(err);
+//   }
+// }
 
 module.exports = {
   graph_data,
-  add_check,
+  // add_check,
+  // check_data
 }

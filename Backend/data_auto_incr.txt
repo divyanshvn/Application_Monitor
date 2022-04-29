@@ -1,3 +1,4 @@
 CREATE sequence auto_increment_id_seq;
 alter table users alter user_id set default nextval('auto_increment_id_seq');
 SELECT setval('auto_increment_id_seq',400);
+alter table users alter last_update set default '-14w';
