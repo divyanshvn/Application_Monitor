@@ -1,12 +1,14 @@
 import React, { useEffect,useState }  from "react";
 import { Form, Button, Container, Alert } from 'react-bootstrap';
 import {processlist,cpulist,disklist,diskIolist,internetlist,dockerlist,postgreslist,systemList,wirelessList} from './constant';
+import AuthService from "./services/auth.service";
 
 function ThresholdForm(){
 
 const [processname, setprocessname] = useState('');
     const [metricname, setMetricName] = useState('');
     const [threshold, setThreshold] = useState('');
+    const user = AuthService.getCurrentUser()["name"];
     const processChangeHandler = (event) => {
         setprocessname(event.target.value);
     }
@@ -22,12 +24,12 @@ const [processname, setprocessname] = useState('');
         event.preventDefault();
         const check = Number(threshold);
         if (Number.isInteger(check)){
-            fetch('http://localhost:3001/threshold_check', {
+            fetch('http://localhost:3001/check/', {
                 method: 'POST',
                 headers: {
                   'Content-Type': 'application/json',
                 },
-                body: JSON.stringify({processname,metricname,threshold}),
+                body: JSON.stringify({processname,metricname,threshold,user}),
             })
             .catch(error => {
               console.error("There was an Error",error);

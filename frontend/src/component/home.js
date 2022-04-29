@@ -4,9 +4,10 @@ import AuthService from "./services/auth.service";
 
 function Home(){
     const user = AuthService.getCurrentUser();
+    console.log(user,19);
 return(
     <div>
-        <div>Hello {user.id} </div>
+        <div>Hello {user["name"]} </div>
         <DefaultUI/>
     </div>
      );

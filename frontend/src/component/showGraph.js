@@ -77,7 +77,7 @@ function ShowGraph() {
           setGetGraph(true);
           console.log(data);
         })
-    }, 10000)
+    }, 3000)
    }
    else{
     window.location.href='/';

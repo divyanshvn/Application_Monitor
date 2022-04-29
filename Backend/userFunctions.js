@@ -7,7 +7,7 @@ const connection = new Client({
     user: 'postgres',
     host: 'localhost',
     database: 'userdb',
-    password: 'root',
+    password: 'monu4702',
     port: 5432
 })
 
@@ -95,7 +95,7 @@ const userAuth = async (req, res) => {
             return res.status(401).json({ error: 'Incorrect Password' });
         }
         else {
-            var x = { "proceed": 1, "status": "Nice", "id": rows["rows"][0].user_id,  "name": rows["rows"][0].name};
+            var x = { "proceed": 1, "status": "nice", "id": rows["rows"][0].user_id,  "name": rows["rows"][0].name};
             res.send(x);
         }
     }
