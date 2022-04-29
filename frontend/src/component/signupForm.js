@@ -65,7 +65,8 @@ function SignupForm(){
 
     return (
         <Container>
-            <Form onSubmit={handleSubmit}>
+          <div className="graphform">
+            <Form onSubmit={handleSubmit} className="graphform">
                 <Form.Group  controlId="form.name">
                     <Form.Label>Name</Form.Label>
                     <Form.Control type="text" placeholder="Enter Your Name" required onChange={nameChangeHandler} />
@@ -78,8 +79,9 @@ function SignupForm(){
                     <Form.Label>password</Form.Label>
                     <Form.Control type={showpassword ? "text" : "password"}  placeholder="Enter Your Password" required onChange={passwordChangeHandler} />
                 </Form.Group>
-                <Button type='submit'>Sign Up</Button>
+                <Button type='submit' className="graphbutton">Sign Up</Button>
             </Form>
+            </div>
         </Container>
     )
 }

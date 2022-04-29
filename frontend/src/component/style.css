@@ -22,12 +22,13 @@
     font-size: 25px;
     color: #e0e0e0;
     display: block;
+    font-family: Comic Sans MS, Comic Sans, cursive;
   }
   
   /* When you mouse over the navigation links, change their color */
   .sidenavbar a:hover {
     color: #f1f1f1;
-    background-color: #010831;
+    background-color: #4503af;
   }
 
 
@@ -73,4 +74,47 @@
 
   .generatedgraph{
     margin-top: 50px;
+  }
+
+  .lddiv {
+    display: flex;
+    flex-direction: column;
+    margin-top: 40px;
+  }
+
+  .ldbutton{
+    padding: 4px 4px 4px 4px;
+    background-color:rgb(13, 238, 238);
+    color:black;
+    text-emphasis-style: none;
+    text-decoration: none;
+    border-radius: 1px;
+    margin-top: 40px;
+    width:10%;
+    margin-left: 45%;
+  }
+
+  .title {
+    font-family: Brush Script MT, Brush Script Std, cursive;
+    font-size: 100px;
+  }
+
+  .subtitle{
+    font-family: Brush Script MT, Brush Script Std, cursive;
+    font-size: 40px;
+  }
+
+  .navbutton {
+    padding: 6px 16px 6px 16px;
+    border-radius: 1px;
+    color:white;
+    background-color: rgb(250, 135, 28);
+    margin-top: 20px;
+  }
+
+  .hometitle{
+    font-family: Brush Script MT, Brush Script Std, cursive;
+    font-size: 60px;
+    text-align: left;
+    margin-left: 45px;
   }
