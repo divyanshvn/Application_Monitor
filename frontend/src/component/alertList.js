@@ -13,7 +13,7 @@ function AlertList() {
     const [finalData, setFinalData] = useState([]);
     const user = AuthService.getCurrentUser()["id"];
     var lists = [];
-    useEffect(() => {
+    /*useEffect(() => {
         setInterval(() => {
             fetch(`http://localhost:3001/list_checks/${user}`)
                 .then(res => res.json())
@@ -25,9 +25,9 @@ function AlertList() {
 
         }, 3000)
 
-    }, [])
+    }, [])*/
 
-    if (nowcall) {
+    /*if (nowcall) {
         gotlist.map((item, index) => {
             fetch('http://localhost:3001/check/', {
                 method: 'POST',
@@ -54,13 +54,13 @@ function AlertList() {
                 });
         })
 
-    }
+    }*/
 
     return (<div>
-        <div style={{ color: "white" }}>Hi</div>
-        {lists.map((item, index) => {
+        <div className="alerttitle">Alerts</div>
+        {/*lists.map((item, index) => {
             <div style={{ color: "white" }}>monu</div>
-        })}
+        })*/}
     </div>)
 }
 

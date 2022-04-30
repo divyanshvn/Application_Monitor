@@ -34,7 +34,7 @@ function SignupForm(){
             },
             (error) => {
                 
-             if(error.response.status == 404){
+             if(error.response.status === 404){
                 alert("user Already exist!");   // do alerts
              }
             }

@@ -2,12 +2,14 @@ export const nodelist = [{value:'Bucket_0',text:'Local'}, {value:'Bucket_1',text
 
 export const processlist = [{value:'cpu',text:'CPU'},{value:'disk',text:'Disk'},{value:'diskio',text:'DiskIo'},{value:'docker',text:'Docker'},
 {value:'internet_speed',text:'Internet Speed'},{value:'postgres',text:'PostgresSql'},{value:'system',text:'System'}
-,{value:'wireless',text:'Wireless'}];
+,{value:'wireless',text:'Wireless'},{value:"mem",text:'Memory'},{value:"net",text:"Network"},{value:"processes",text:"processes"},{value:"swap",text:"swap"}];
 
 export const cpulist = [{value:'',text:'Choose metric'},{value:'sys_num',text:'system number'},{value:'cpu_id',text:'Cpu id'},{value:'time_user',text:'time user'},{value:'time_system',text:'time system'},
                      {value:'time_idle',text:'time_idle'},{value:'time_active',text:'time_active'},{value:'time_iowait',text:'time_iowait'},{value:'time_softirq',text:'time_softirq'},
                      {value:'usage_user',text:'usage_user'},{value:'usage_system',text:'usage_system'},{value:'usage_idle',text:'usage_idle'},{value:'usage_active',text:'usage_active'},
-                     {value:'usage_iowait',text:'usage_iowait'}];
+                     {value:'usage_iowait',text:'usage_iowait'},{value:'time_nice',text:'time_nice'},{value:'time_irq',text:'time_irq'},{value:'time_steal',text:'time_steal'},{value:'time_guest',text:'time_guest'}];
+export const memorylist = [{value:'',text:'Choose metric'},{value:'active',text:'active'},{value:'available',text:'available'},{value:'available_percent',text:'available_percent'},{value:'buffered',text:'buffered'},{value:'cached',text:'cached'},{value:'commit_limit',text:'commit_limit'},{value:'dirty',text:'dirty'},{value:'high_free',text:'high_free'},{value:'high_total ',text:'high_total '},
+{value:'huge_pages_free',text:'huge_pages_free'},{value:'mapped ',text:'mapped '},{value:'page_tables',text:'page_tables'},{value:'slab',text:'slab'},{value:'used_percent ',text:'used_percent '}];
 
 export const disklist = [{value:'',text:'Choose metric'},{value:'sys_num',text:'sys_num'},{value:'fstype',text:'fstype'},{value:'device',text:'device'},{value:'path',text:'path'},{value:'mode',text:'mode'},
     {value:'free',text:'free'},{value:'total',text:'total'},{value:'used',text:'used'}                
@@ -31,3 +33,11 @@ export const systemList = [{value:'',text:'Choose metric'},{value:'sys_num',text
 
 export const wirelessList = [{value:'',text:'Choose metric'},{value:'sys_num',text:'sys_num'},{value:'interface',text:'interface'},{value:'status',text:'status'},{value:'link',text:'link'},{value:'level',text:'level'},{value:'noise',text:'noise'},
     {value:'nwid',text:'nwid'},{value:'crypt',text:'crypt'},{value:'frag',text:'frag'},{value:'retry',text:'retry'},{value:'misc',text:'misc'},{value:'missed_beacon',text:'missed_beacon'}];
+
+export const networklist = [{value:'',text:'Choose metric'},{value:'active',text:'active'},{value:'available',text:'available'},{value:'available_percent',text:'available_percent'},{value:'buffered',text:'buffered'},{value:'cached',text:'cached'},{value:'committed_as',text:'committed_as'},{value:'dirty',text:'dirty'},{value:'high_free',text:'high_free'},
+{value:'high_total',text:'high_total'},{value:'inactive',text:'inactive'},{value:'low_total',text:'low_total'},{value:'slab',text:'slab'},{value:'swap_free',text:'swap_free'},{value:'swap_total',text:'swap_total'}];
+
+export const processeslist = [{value:'',text:'Choose metric'},{value:"total_threads",text:"total_threads"},{value:"running",text:"running"},{value:"sleeping",text:"sleeping"},{value:"zombie",text:"zombie"}];
+
+export const swaplist = [{value:'',text:'Choose metric'},{value:"free",text:"free"},{value:"total",text:"total"},{value:"used",text:"used"},{value:"used_percent",text:"used_percent"}];
+

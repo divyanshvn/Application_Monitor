@@ -1,6 +1,6 @@
 import React, { useEffect,useState }  from "react";
 import { Form, Button, Container, Alert } from 'react-bootstrap';
-import {processlist,cpulist,disklist,diskIolist,internetlist,dockerlist,postgreslist,systemList,wirelessList,nodelist} from './constant';
+import {processlist,cpulist,disklist,diskIolist,internetlist,dockerlist,postgreslist,systemList,wirelessList,nodelist,memorylist,networklist,processeslist,swaplist} from './constant';
 import AuthService from "./services/auth.service";
 
 function ThresholdForm(){
@@ -129,6 +129,38 @@ return(
                                     <option value={item.value} key={item.value}>{item.text}</option>); 
                               })
                             )
+                        }
+                        else if (processname === 'mem') {
+                          return (
+                            memorylist.map(item => {
+                              return (
+                                <option value={item.value} key={item.value}>{item.text}</option>);
+                            })
+                          )
+                        }
+                        else if (processname === 'net') {
+                          return (
+                            networklist.map(item => {
+                              return (
+                                <option value={item.value} key={item.value}>{item.text}</option>);
+                            })
+                          )
+                        }
+                        else if (processname === 'processes') {
+                          return (
+                            processeslist.map(item => {
+                              return (
+                                <option value={item.value} key={item.value}>{item.text}</option>);
+                            })
+                          )
+                        }
+                        else if (processname === 'swap') {
+                          return (
+                            swaplist.map(item => {
+                              return (
+                                <option value={item.value} key={item.value}>{item.text}</option>);
+                            })
+                          )
                         }
                         else {
                             return ( <option>Open this to select Process</option>)
