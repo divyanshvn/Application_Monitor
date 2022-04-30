@@ -10,10 +10,6 @@ const signup = (name,email,password) => {
       password,
     })
     .then((response) => {
-      //if (response.data.accessToken) {
-       // localStorage.setItem("user", JSON.stringify(response));// response.data changed to response
-      //}
-      //localStorage.setItem("user", JSON.stringify(response.data));
       return response.data;
     });
 };
@@ -35,7 +31,6 @@ const login = (email, password) => {
          return response.error;
       }
 
-     // 
     });
 };
 

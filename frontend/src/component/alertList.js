@@ -18,11 +18,9 @@ function AlertList() {
             fetch(`http://localhost:3001/list_checks/${user}`)
                 .then(res => res.json())
                 .then(data => {
-                    // console.log(8);
 
                     setGotList(data["alerts"]);
                     setNowCall(true);
-                    //console.log(data["alerts"], 43);
                 })
 
         }, 3000)
@@ -30,11 +28,7 @@ function AlertList() {
     }, [])
 
     if (nowcall) {
-        // console.log(133);
-        // console.log(gotlist);
         gotlist.map((item, index) => {
-            // console.log("helloo");
-            // console.log(item)
             fetch('http://localhost:3001/check/', {
                 method: 'POST',
                 headers: {
@@ -49,19 +43,11 @@ function AlertList() {
             })
                 .then(res => res.json())
                 .then(data => {
-                    //  console.log(data);
                     setFinalData(data);
-                    // console.log(9);
-                    // setGotList(data);
-                    // console.log(data, 44);
                     data = data["alerts"];
-                 //   console.log(data.length, "hrhrh");
                     for (var i4 = 0; i4 < data.length; i4++) {
-                        // console.log(item1);
-                   //     console.log(1)
                         lists.push(data[i4]);
                     }
-                  //  console.log(lists, 123);
                 })
                 .catch(error => {
                     console.error("There was an Error", error);

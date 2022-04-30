@@ -39,7 +39,6 @@ const check_helper1 = async ( row, time_start) => {
   |> filter(fn: (r) => r["_measurement"] == "${process}")
   |> filter(fn: (r) => r["_field"] == "${metric}")`;
 
-  // console.log(fluxQuery);
 
   var _y = await queryApi.queryRows(fluxQuery, {
     next(row, tableMeta) {
@@ -47,13 +46,11 @@ const check_helper1 = async ( row, time_start) => {
       
       var x1 = o._value;
       var t1 = o._time;
-      // console.log(`${t1} : ${x1}`);
 
       new_start = t1;
       
       if(x1 > threshold){
         x2.push(`Metric ${metric} of process ${process} has value ${x1} greater than threshold ${threshold} at time ${t1} `);
-        // console.log(`Metric ${metric} of process ${process} has value ${x1} greater than threshold ${threshold} at time ${t1} `);
       }
     },
     error(error) {
@@ -79,11 +76,6 @@ const graph_data = (req, res) => {
   |> filter(fn: (r) => r["_measurement"] == "${process}")
   |> filter(fn: (r) => r["_field"] == "${metric}")`
 
-  // const fluxQuery = 'from(bucket: "MyBucket1")\
-  //   |> range(start: -10w, stop : -4m) \
-  //   |> filter(fn: (r) => r["_measurement"] == "boltdb_reads_total")'
-
-  // ret_obj = {}
   let x = []
   let time_x = []
   let ret_x = []
@@ -91,7 +83,6 @@ const graph_data = (req, res) => {
   queryApi.queryRows(fluxQuery, {
     next(row, tableMeta) {
       const o = tableMeta.toObject(row)
-      // console.log(`${o._measurement} , ${o._value}, ${o._field}`)
 
       x.push(o._value);
       time_x.push(o._time);
@@ -99,9 +90,6 @@ const graph_data = (req, res) => {
         "time": o._time,
         "value": o._value
       });
-      // console.log(
-      //   `${o._time} ${o._measurement} : ${o._field}=${o._value}`
-      // )
 
     },
     error(error) {
@@ -140,8 +128,6 @@ const add_check = async (req, res) => {
 }
 
 const check_data = async (req, res) => {
-  // console.log(req.params.id);
-  // console.log("HELLLLLLOOOOO");
   var user_id = parseInt(req.body.id);
 
   const query1 = `
@@ -166,7 +152,6 @@ const check_data = async (req, res) => {
     var rows1 = await connection.query(query2, [user_id]);
     const recent_update = rows1["rows"][0]["last_update"];
 
-    // const recent_update = "-14";
     console.log(recent_update,"---");
     var rows2 = await connection.query(query3, [user_id]);
     rows2 = rows2["rows"];
@@ -178,12 +163,6 @@ const check_data = async (req, res) => {
       var _x = await check_helper1(x,recent_update,l);
       console.log(_x);
     });
-    // for(var i = 0; i < rows2.length; i++){
-    //   const _x = await check_helper1(rows2[i],recent_update);
-    //   console.log(_x);
-    // }
-
-    // var rows3 = await connection.query(query1,[user_id,new_start]);
     res.send({"alerts":l});
 
     return;
@@ -193,43 +172,3 @@ const check_data = async (req, res) => {
     console.log(err);
   }
 }
-
-// module.exports = {
-//   graph_data,
-//   add_check,
-//   check_data,
-// }
-
-
-// const check_helper = async (i, n, time_start, rows2, fluxQuery, new_start) => {
-//   queryApi.queryRows(fluxQuery, {
-//     next(row, tableMeta) {
-//       const o = tableMeta.toObject(row)
-//       const process = rows2[i]["process"];
-//       const metric = rows2[i]["metric"];
-//       const threshold = rows2[i]["threshold"];
-
-//       var x1 = o._value;
-//       var t1 = o._time;
-      
-//       new_start = t1;
-
-//       if(x1 > threshold){
-//         l.push(`Metric ${metric} of process ${process} has value ${x1} greater than threshold ${threshold} at time ${t1} `);
-//       }
-//     },
-//     error(error) {
-//       console.error(error)
-//       console.log('\nFinished ERROR')
-//     },
-//     complete() {
-//       if(i == n-1){
-//         return new_start;
-//       }
-//       var _x = await check_helper(i+1,n,time_start,rows2,fluxQuery, new_start);
-//       // console.log('\nFinished SUCCESS');
-//       return _x;
-//     },
-
-//   })
-// }

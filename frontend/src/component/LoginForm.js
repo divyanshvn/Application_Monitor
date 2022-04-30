@@ -22,25 +22,6 @@ function LoginForm(){
     }
 
 
-    
-  /*  async function fetchData() {
-        fetch(`http://localhost:3001/graph/${addemail}/${addpassword}`) // check url
-            .then(res => res.json())
-            .then(data => {
-                //printBoxes(data, setX);
-                localStorage.setItem("userInfo",JSON.stringify(data));
-                setData(data);
-                console.log(data);
-           })
-           .catch(error => {
-              setError(error.response.data.message);
-          });
-      }*/
-  
-      /*useEffect(() => {
-        fetchData()
-      }, [])*/
-
       const HandleSubmit = async (e) => {
         e.preventDefault();
         try {
@@ -60,24 +41,6 @@ function LoginForm(){
           console.log(err);
         }
       };
-  
-   /*   const HandleSubmit = (event) => {
-          event.preventDefault();
-          try {
-            await AuthService.login(email, password).then(
-              () => {
-                navigate("/home");
-                window.location.reload();
-              },
-              (error) => {
-                console.log(error);
-              }
-            );
-          } catch (err) {
-            console.log(err);
-          }
-      }*/
-
 
 
     return (

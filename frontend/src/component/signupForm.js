@@ -24,27 +24,11 @@ function SignupForm(){
         setPassword(event.target.value);
     }
     
-    /*const handleSubmit = (event) => {
-        event.preventDefault();
-            fetch('http://localhost:3001/user/register/', {
-                method: 'POST',
-                headers: {
-                  'Content-Type': 'application/json',
-                },
-                body: JSON.stringify({addname,addemail,addpassword}),
-            })
-            .catch(error => {
-              console.error("There was an Error",error);
-            });
-    }*/
-    
     const handleSubmit = async (e) => {
         e.preventDefault();
         try {
           await AuthService.signup(addname,addemail, addpassword).then(
             (response) => {
-              // check for token and user already exists with 200
-              //   console.log("Sign up successfully", response);
               navigate("/");
               window.location.reload();
             },

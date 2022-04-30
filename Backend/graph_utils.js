@@ -37,11 +37,7 @@ const graph_data = async (req, res) => {
     |> filter(fn: (r) => r["_measurement"] == "${process}")
     |> filter(fn: (r) => r["_field"] == "${metric}")`
   
-    // const fluxQuery = 'from(bucket: "MyBucket1")\
-    //   |> range(start: -10w, stop : -4m) \
-    //   |> filter(fn: (r) => r["_measurement"] == "boltdb_reads_total")'
   
-    // ret_obj = {}
     let x = []
     let time_x = []
     let ret_x = []
@@ -49,7 +45,6 @@ const graph_data = async (req, res) => {
     queryApi.queryRows(fluxQuery, {
       next(row, tableMeta) {
         const o = tableMeta.toObject(row)
-        // console.log(`${o._measurement} , ${o._value}, ${o._field}`)
   
         x.push(o._value);
         time_x.push(o._time);
@@ -57,9 +52,6 @@ const graph_data = async (req, res) => {
           "time": o._time,
           "value": o._value
         });
-        // console.log(
-        //   `${o._time} ${o._measurement} : ${o._field}=${o._value}`
-        // )
   
       },
       error(error) {
@@ -75,20 +67,6 @@ const graph_data = async (req, res) => {
     });
   
 }
-
-// const list_graphs = async (req,res) => {
-//     const user_id = req.body.id;
-//     const query1 = `
-//     SELECT process, metric, time_start, time_end
-//     from graphs
-//     where user_id = user_id
-//     `;
-
-//     const rows = await connection.query(query1);
-//     rows = rows["rows"];
-
-
-// }
 
 module.exports = {
     graph_data,
