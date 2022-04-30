@@ -1,0 +1,8 @@
+1. Setup the Influx and telegraf for monitoring the data at all the nodes(we use 2 machines). All the data is monitored at first.
+2. The data is then exported to a desired location on the system in a folder named generated_data. 
+3. Then we host the data on the network using the python http server module using the command:
+		python -m http.server 9000
+4. Then we expose the hosted server using ng-rok and get the assigned url. These are then set into the host server to get the data.
+5. Then we run the write_data.sh script to download the data from the nodes and load into different buckets on the server.
+6. Once loaded into the bucket the data can be queried as usual to get the desired data.
+

@@ -28,7 +28,7 @@ const login = (email, password) => {
       }
       else{
          alert("login failed");
-         return response.error;
+        //  return response.error;
       }
 
     });
