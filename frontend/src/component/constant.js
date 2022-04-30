@@ -1,4 +1,4 @@
-export const nodelist = [{value:'Bucket_1',text:'System 1'},{value:'Bucket_2',text:'System 2'}];
+export const nodelist = [{value:'Bucket_0',text:'Local'}, {value:'Bucket_1',text:'System 1'},{value:'Bucket_2',text:'System 2'}];
 
 export const processlist = [{value:'cpu',text:'CPU'},{value:'disk',text:'Disk'},{value:'diskio',text:'DiskIo'},{value:'docker',text:'Docker'},
 {value:'internet_speed',text:'Internet Speed'},{value:'postgres',text:'PostgresSql'},{value:'system',text:'System'}

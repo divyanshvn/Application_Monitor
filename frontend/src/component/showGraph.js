@@ -16,7 +16,7 @@ function ShowGraph() {
   const [label, setLabels] = useState([]);
   const [getgraph, setGetGraph] = useState(false);
   const [sendrequest,setRequest] = useState(false);
-  var setsnode = {"Bucket_1":"System 1","Bucket_2":"System 2"};
+  var setsnode = {"Bucket_0": "Local", "Bucket_1":"System 1","Bucket_2":"System 2"};
   const processChangeHandler = (event) => {
     setprocessname(event.target.value);
   }
