@@ -5,7 +5,7 @@ const UserFunctions = require('./userFunctions')
 const graphFunc = require('./graph_utils')
 const AlertFunc = require('./Alert_utils')
 
-router.get('/graph/:process/:metric/:time_start/:time_end', graphFunc.graph_data)
+router.get('/graph/:node/:process/:metric/:time_start/:time_end', graphFunc.graph_data)
 router.post('/add_check/', AlertFunc.add_check)
 router.post('/user/register/', UserFunctions.register_user)
 router.post('/user/login', UserFunctions.userAuth)

@@ -30,8 +30,9 @@ const graph_data = async (req, res) => {
     var metric = (req.params.metric);
     var time_start = req.params.time_start;
     var time_end = req.params.time_end;
-  
-    const fluxQuery = `from(bucket: "${bucket}")\
+    var node = req.params.node;
+
+    const fluxQuery = `from(bucket: "${node}")\
     |> range(start: ${time_start}, stop: ${time_end} )\
     |> filter(fn: (r) => r["_measurement"] == "${process}")
     |> filter(fn: (r) => r["_field"] == "${metric}")`
