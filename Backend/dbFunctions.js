@@ -118,17 +118,18 @@ const graph_data = (req, res) => {
 }
 
 const add_check = async (req, res) => {
-  var metric = req.body.metric;
-  var threshold_val = parseInt(req.body.value);
+  var metric = req.body.metricname;
+  var threshold_val = parseInt(req.body.threshold);
   var user_id = req.body.user;
-  var process = req.body.process;
+  var process = req.body.processname;
+  var bucket = req.body.nodename;
 
   const query = `
-    insert into checks(user_id,process,metric,threshold) values ($1,$2,$3,$4)
+    insert into checks(user_id,system,process,metric,threshold) values ($1,$2,$3,$4,$5)
   `
   try {
 
-    const rows = await connection.query(query, [user_id, process, metric, threshold_val])
+    const rows = await connection.query(query, [user_id, bucket, process, metric, threshold_val])
     var x = { status: "New Threshold check Added", proceed: 1 };
     res.send(x);
 
