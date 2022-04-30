@@ -7,7 +7,7 @@ function MyRoute(props){
     const navigate = useNavigate();
     useEffect(() => {
       setshow(props);
-        console.log(show,17);
+      //  console.log(show,17);
     }, []);
     
       function logoutSite() {

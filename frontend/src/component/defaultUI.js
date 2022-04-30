@@ -12,7 +12,7 @@ function DefaultUI() {
          <div>
              <div className="dashboard">Dashboard</div>
              <div>
-              Monitoring System 1
+              <div className="defaulttitle">Monitoring System 1</div>
              <div className="defaultui">
              <div className="defaultgraph">
              <DefaultGraph sendval={{metric:"usage_idle",process:"cpu",starttime:"-4m",endtime:"-1s",graphtitle:"Usage idle for Cpu",yaxis:"Value",backgroundcolor:"pink",node:"Bucket_1"}}/>
@@ -31,7 +31,7 @@ function DefaultUI() {
              </div>
              </div>
              <div>
-              Monitoring System 2
+             <div className="defaulttitle">Monitoring System 2</div>
              <div className="defaultui">
              <div className="defaultgraph">
              <DefaultGraph sendval={{metric:"usage_idle",process:"cpu",starttime:"-4m",endtime:"-1s",graphtitle:"Usage idle for Cpu",yaxis:"Value",backgroundcolor:"pink",node:"Bucket_2"}}/>

@@ -17,12 +17,12 @@ function DefaultGraph(props){
         const [data, setData] = useState([]);
         const [label, setLabels] = useState([]);
         const show_length = 20;
-        console.log(234);
-        console.log(user);
+       // console.log(234);
+       // console.log(user);
            useEffect(() => {
          //       console.log(props.sendval.metric,props.process,props.starttime,props.endtime);
                 if (user){
-                  console.log(235);
+               //   console.log(235);
                 setInterval(() => {
                     fetch(`http://localhost:3001/graph/${props.sendval.node}/${props.sendval.process}/${props.sendval.metric}/${props.sendval.starttime}/${props.sendval.endtime}`)
                       .then(res => res.json())
@@ -39,7 +39,7 @@ function DefaultGraph(props){
                             xnew = x;
                             ynew = y;
                         }
-                        console.log(236);
+                       // console.log(236);
                         // data.map((item, index) => {
                         //   x.push(item.time);
                         //   y.push(item.value);

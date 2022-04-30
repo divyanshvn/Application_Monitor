@@ -4,7 +4,7 @@ import AuthService from "./services/auth.service";
 
 function Home(){
     const user = AuthService.getCurrentUser();
-    console.log(user,19);
+    //console.log(user,19);
 return(
     <div>
         <div className="hometitle">Welcome {user["name"]} in Application Monitor</div>

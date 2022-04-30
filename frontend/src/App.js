@@ -25,9 +25,9 @@ function App() {
   useEffect(() => {
     document.body.style.backgroundColor = "#07070e"
     const user = AuthService.getCurrentUser();
-    console.log(user, 15);
+    //console.log(user, 15);
     if (user) {
-      console.log(50);
+     // console.log(50);
       setCurrentUser(user);
     }
   }, []);

@@ -55,13 +55,13 @@ function AlertList() {
                     // setGotList(data);
                     // console.log(data, 44);
                     data = data["alerts"];
-                    console.log(data.length, "hrhrh");
+                 //   console.log(data.length, "hrhrh");
                     for (var i4 = 0; i4 < data.length; i4++) {
                         // console.log(item1);
-                        console.log(1)
+                   //     console.log(1)
                         lists.push(data[i4]);
                     }
-                    console.log(lists, 123);
+                  //  console.log(lists, 123);
                 })
                 .catch(error => {
                     console.error("There was an Error", error);

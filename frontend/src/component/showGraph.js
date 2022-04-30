@@ -1,6 +1,6 @@
 import React, { useEffect, useState } from "react";
 import { Form, Button, Container, Alert } from 'react-bootstrap';
-import { processlist, cpulist, disklist, diskIolist, internetlist, dockerlist, postgreslist, systemList, wirelessList } from './constant';
+import { processlist, cpulist, disklist, diskIolist, internetlist, dockerlist, postgreslist, systemList, wirelessList,nodelist } from './constant';
 import { Bar, Line } from 'react-chartjs-2';
 import AuthService from "./services/auth.service";
 
@@ -11,11 +11,12 @@ function ShowGraph() {
   const [metricname, setMetricName] = useState('');
   const [starttime, setStartTime] = useState('');
   const [endtime, setEndTime] = useState('');
+  const [nodes,setNode] = useState('');
   const [data, setData] = useState([]);
   const [label, setLabels] = useState([]);
   const [getgraph, setGetGraph] = useState(false);
   const [sendrequest,setRequest] = useState(false);
-
+  var setsnode = {"Bucket_1":"System 1","Bucket_2":"System 2"};
   const processChangeHandler = (event) => {
     setprocessname(event.target.value);
   }
@@ -32,6 +33,10 @@ function ShowGraph() {
     setEndTime(event.target.value);
   }
 
+  const nodeChangeHandler = (event) => {
+    setNode(event.target.value);
+  }
+
   async function fetchData() {
     const user = AuthService.getCurrentUser();
     const show_length = 50;
@@ -41,7 +46,7 @@ function ShowGraph() {
       console.log("My Timer", myTimer);
       clearInterval(myTimer);
       myTimer = setInterval(() => {
-      fetch(`http://localhost:3001/graph/${processname}/${metricname}/${starttime}/${endtime}`)
+      fetch(`http://localhost:3001/graph/${nodes}/${processname}/${metricname}/${starttime}/${endtime}`)
         .then(res => res.json())
         .then(data => {
           var x = data["time"];
@@ -85,7 +90,7 @@ function ShowGraph() {
     plugins: {
       title: {
         display: true,
-        text: `${metricname} V/s Time`,
+        text: `${metricname} V/s Time (${setsnode[nodes]})`,
         font: {
           size: 16,
         },
@@ -123,6 +128,13 @@ borderWidth: 2 ,
     <Container>
       <div className="graphformdiv">
       <Form onSubmit={HandleSubmit} className="graphform" >
+      <Form.Label>System</Form.Label>
+        <Form.Select aria-label="Default select example" onChange={nodeChangeHandler}>
+          <option>Open this to select System</option>
+          {nodelist.map(item => {
+            return (<option value={item.value} key={item.value}>{item.text}</option>);
+          })}
+        </Form.Select>
         <Form.Label>Process</Form.Label>
         <Form.Select aria-label="Default select example" onChange={processChangeHandler}>
           <option>Open this to select Process</option>

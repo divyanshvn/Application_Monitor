@@ -1,6 +1,6 @@
 import React, { useEffect,useState }  from "react";
 import { Form, Button, Container, Alert } from 'react-bootstrap';
-import {processlist,cpulist,disklist,diskIolist,internetlist,dockerlist,postgreslist,systemList,wirelessList} from './constant';
+import {processlist,cpulist,disklist,diskIolist,internetlist,dockerlist,postgreslist,systemList,wirelessList,nodelist} from './constant';
 import AuthService from "./services/auth.service";
 
 function ThresholdForm(){
@@ -8,6 +8,8 @@ function ThresholdForm(){
 const [processname, setprocessname] = useState('');
     const [metricname, setMetricName] = useState('');
     const [threshold, setThreshold] = useState('');
+    const [nodename,setNodename] = useState('');
+
     const user = AuthService.getCurrentUser()["id"];
     const processChangeHandler = (event) => {
         setprocessname(event.target.value);
@@ -20,6 +22,12 @@ const [processname, setprocessname] = useState('');
     const thresholdChangeHandler = (event) => {
         setThreshold(event.target.value);
     }
+    
+    const nodeChangeHandler = (event) => {
+      setNodename(event.target.value);
+  }
+
+
     const handleSubmit = (event) => {
         event.preventDefault();
         const check = Number(threshold);
@@ -29,14 +37,14 @@ const [processname, setprocessname] = useState('');
                 headers: {
                   'Content-Type': 'application/json',
                 },
-                body: JSON.stringify({processname,metricname,threshold,user}),
+                body: JSON.stringify({processname,metricname,threshold,user,nodename}),
             })
             .catch(error => {
               console.error("There was an Error",error);
             });
         }
         else{
-            alert("whattttt!");
+            alert("There was error in setting Alert!");
         }
     }
 return(
@@ -44,6 +52,13 @@ return(
         <Container>
         <div className="graphformdiv">
         <Form onSubmit={handleSubmit} className="graphform">
+        <Form.Label>System</Form.Label>
+        <Form.Select aria-label="Default select example" onChange={nodeChangeHandler}>
+          <option>Open this to select System</option>
+          {nodelist.map(item => {
+            return (<option value={item.value} key={item.value}>{item.text}</option>);
+          })}
+        </Form.Select>
         <Form.Label>Process</Form.Label>
         <Form.Select aria-label="Default select example" onChange={processChangeHandler}>
              <option>Open this to select Process</option>

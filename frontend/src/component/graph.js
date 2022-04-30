@@ -42,7 +42,7 @@ function Graph(props){
           var a = [];
           var b = [];
           var color = [];
-          console.log(data);
+         // console.log(data);
          data.map((item, index) => {
           a.push(item.match);
           if(item.runs <30){
