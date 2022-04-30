@@ -24,7 +24,7 @@ function DefaultGraph(props){
                 if (user){
                   console.log(235);
                 setInterval(() => {
-                    fetch(`http://localhost:3001/graph/${props.sendval.process}/${props.sendval.metric}/${props.sendval.starttime}/${props.sendval.endtime}`)
+                    fetch(`http://localhost:3001/graph/${props.sendval.node}/${props.sendval.process}/${props.sendval.metric}/${props.sendval.starttime}/${props.sendval.endtime}`)
                       .then(res => res.json())
                       .then(data => {
                         var x = data["time"];

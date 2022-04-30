@@ -11,20 +11,42 @@ function DefaultUI() {
      return(
          <div>
              <div className="dashboard">Dashboard</div>
+             <div>
+              Monitoring System 1
              <div className="defaultui">
              <div className="defaultgraph">
-             <DefaultGraph sendval={{metric:"usage_idle",process:"cpu",starttime:"-4m",endtime:"-1s",graphtitle:"Usage idle for Cpu",yaxis:"Value",backgroundcolor:"pink"}}/>
+             <DefaultGraph sendval={{metric:"usage_idle",process:"cpu",starttime:"-4m",endtime:"-1s",graphtitle:"Usage idle for Cpu",yaxis:"Value",backgroundcolor:"pink",node:"Bucket_1"}}/>
              </div>
              <div className="defaultgraph">
-             <DefaultGraph sendval={{metric:"used_percent",process:"disk",starttime:"-4m",endtime:"-1s",graphtitle:"Used Percent Of Disk",yaxis:"% of disk",backgroundcolor:"blue"}}/>
+             <DefaultGraph sendval={{metric:"used_percent",process:"disk",starttime:"-4m",endtime:"-1s",graphtitle:"Used Percent Of Disk",yaxis:"% of disk",backgroundcolor:"blue",node:"Bucket_1"}}/>
              </div>
              </div>
              <div className="defaultui">
              <div className="defaultgraph">
-             <DefaultGraph sendval={{metric:"usage_iowait",process:"cpu",starttime:"-4m",endtime:"-1s",graphtitle:"Usage iowait for Cpu",yaxis:"Value",backgroundcolor:"green"}}/>
+             <DefaultGraph sendval={{metric:"usage_iowait",process:"cpu",starttime:"-4m",endtime:"-1s",graphtitle:"Usage iowait for Cpu",yaxis:"Value",backgroundcolor:"green",node:"Bucket_1"}}/>
              </div>
              <div className="defaultgraph">
-             <DefaultGraph sendval={{metric:"read_bytes",process:"diskio",starttime:"-4m",endtime:"-1s",graphtitle:"Read Bytes from DiskIo",yaxis:"Bytes",backgroundcolor:"red"}}/>
+             <DefaultGraph sendval={{metric:"read_bytes",process:"diskio",starttime:"-4m",endtime:"-1s",graphtitle:"Read Bytes from DiskIo",yaxis:"Bytes",backgroundcolor:"red",node:"Bucket_1"}}/>
+             </div>
+             </div>
+             </div>
+             <div>
+              Monitoring System 2
+             <div className="defaultui">
+             <div className="defaultgraph">
+             <DefaultGraph sendval={{metric:"usage_idle",process:"cpu",starttime:"-4m",endtime:"-1s",graphtitle:"Usage idle for Cpu",yaxis:"Value",backgroundcolor:"pink",node:"Bucket_2"}}/>
+             </div>
+             <div className="defaultgraph">
+             <DefaultGraph sendval={{metric:"used_percent",process:"disk",starttime:"-4m",endtime:"-1s",graphtitle:"Used Percent Of Disk",yaxis:"% of disk",backgroundcolor:"blue",node:"Bucket_2"}}/>
+             </div>
+             </div>
+             <div className="defaultui">
+             <div className="defaultgraph">
+             <DefaultGraph sendval={{metric:"usage_iowait",process:"cpu",starttime:"-4m",endtime:"-1s",graphtitle:"Usage iowait for Cpu",yaxis:"Value",backgroundcolor:"green",node:"Bucket_2"}}/>
+             </div>
+             <div className="defaultgraph">
+             <DefaultGraph sendval={{metric:"read_bytes",process:"diskio",starttime:"-4m",endtime:"-1s",graphtitle:"Read Bytes from DiskIo",yaxis:"Bytes",backgroundcolor:"red",node:"Bucket_2"}}/>
+             </div>
              </div>
              </div>
          </div>
